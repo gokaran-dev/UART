@@ -50,7 +50,7 @@ This project implements a complete **UART communication protocol** in **behavior
 
 #### Output Waveform
 
-![Baud Rate Generator Output](results/Baud_rate_generator.png)
+![Baud Rate Generator Output](results/output_2.png)
 
 ---
 
