@@ -54,6 +54,8 @@ This project implements a complete **UART communication protocol** in **behavior
 
 ---
 
+![UART Output](results/output.png)
+
 ### Transmitter (TX)
 
 - **Inputs**:  
@@ -87,9 +89,9 @@ This project implements a complete **UART communication protocol** in **behavior
 
 ---
 
-## Output Waveform
+## Block Diagram
 
-![UART Output](results/output.png)
+![Block Diagram](results/block_diagram.png)
 
 ---
 
