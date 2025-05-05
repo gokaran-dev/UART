@@ -2,8 +2,8 @@
 
 module timer_input_tb;
 
-    parameter BITS = 11;
-    parameter FINAL_VALUE = 650;
+    parameter BITS=11;
+    parameter FINAL_VALUE=650;
 
     reg clk=0;
     reg reset_n=0;
@@ -12,7 +12,7 @@ module timer_input_tb;
     wire [BITS-1:0] Q;
 
 
-    timer_input #(.BITS(BITS)) uut (
+    timer_input #(.BITS(BITS)) uut(
         .clk(clk),
         .reset_n(reset_n),
         .enable(enable),

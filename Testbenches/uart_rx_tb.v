@@ -14,17 +14,17 @@ module uart_rx_tb;
     wire [DBIT-1:0] rx_dout;
 
 
-    timer_input #(.BITS(11)) baud_gen (
+    timer_input #(.BITS(11)) baud_gen(
         .clk(clk),
         .reset_n(reset_n),
         .enable(1'b1),
         .FINAL_VALUE(FINAL_VALUE),
-        .Q_reg(),     // Unused
+        .Q_reg(),     
         .done(s_tick)
     );
 
 
-    uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) dut (
+    uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) dut(
         .clk(clk),
         .reset_n(reset_n),
         .rx(rx),
@@ -46,7 +46,7 @@ module uart_rx_tb;
             while(count<16) 
 	    begin
                 @(posedge s_tick);
-                count=count + 1;
+                count=count+1;
             end
 
             // Data bits (LSB first)
@@ -57,7 +57,7 @@ module uart_rx_tb;
                 while(count<16) 
 		begin
                     @(posedge s_tick);
-                    count = count + 1;
+                    count = count+1;
                 end
             end
 
@@ -73,9 +73,9 @@ module uart_rx_tb;
     endtask
 
     initial begin
-        reset_n = 0;
+        reset_n=0;
         #20;
-        reset_n = 1;
+        reset_n=1;
 	//wait for sometime before sending
         #100;
 

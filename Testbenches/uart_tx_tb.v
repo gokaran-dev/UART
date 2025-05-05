@@ -44,24 +44,24 @@ module uart_tx_tb;
     );
 
 
-    always #5 clk = ~clk;
+    always #5 cl=~clk;
 
 
     initial begin
  
-        clk = 0;
-        reset_n = 0;
-        tx_start = 0;
-        tx_din = 8'b10101010;
+        clk=0;
+        reset_n=0;
+        tx_start=0;
+        tx_din=8'b10101010;
 
         // Reset pulse
-        #20 reset_n = 1;
+        #20 reset_n=1;
 
      
         #100;
-        tx_start = 1;  
+        tx_start=1;  
         #10;
-        tx_start = 0; 
+        tx_start=0; 
 
        
         wait(tx_done_tick);

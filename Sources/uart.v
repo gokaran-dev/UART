@@ -17,19 +17,19 @@ module uart
     wire s_tick;
     wire baud_done;
 
-    timer_input #(.BITS(11)) baud_gen (
+    timer_input #(.BITS(11)) baud_gen(
         .clk(clk),
         .reset_n(reset_n),
         .enable(1'b1),
         .FINAL_VALUE(FINAL_VALUE),
-        .Q_reg(), // We don't need to store the counter value
+        .Q_reg(), 
         .done(baud_done)
     );
 
-    assign s_tick = baud_done; 
+    assign s_tick=baud_done; 
 
  
-    uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) rx_inst (
+    uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) rx_inst(
         .clk(clk),
         .reset_n(reset_n),
         .rx(rx),
@@ -39,7 +39,7 @@ module uart
     );
 
   
-    uart_tx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) tx_inst (
+    uart_tx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) tx_inst(
         .clk(clk),
         .reset_n(reset_n),
         .tx_start(tx_start),

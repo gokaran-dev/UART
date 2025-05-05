@@ -56,6 +56,14 @@ This project implements a complete **UART communication protocol** in **behavior
 
 ![UART Output](results/output.png)
 
+---
+
+## Block Diagram
+
+![Block Diagram](results/block_diagram.png)
+
+---
+
 ### Transmitter (TX)
 
 - **Inputs**:  
@@ -86,12 +94,6 @@ This project implements a complete **UART communication protocol** in **behavior
 - **Baud generator** confirmed via:
   - Count tracking from 0 to 649
   - Assertion of `s_tick` precisely at 650th cycle
-
----
-
-## Block Diagram
-
-![Block Diagram](results/block_diagram.png)
 
 ---
 
