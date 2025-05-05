@@ -134,8 +134,6 @@ This UART communication system is fully compatible with **FPGA deployment** usin
 
 ## Notes
 
-- Fully **behavioral Verilog** design
-- Uses FSMs for all module control flow
 - Frame length, oversampling ratio, and timing are configurable
 - Extensible for parity, custom frame sizes, and buffering
 
