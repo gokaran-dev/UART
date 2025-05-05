@@ -42,7 +42,7 @@ This project implements a complete **UART communication protocol** in **behavior
 ### Baud Rate Generator
 
 - **Function**: Provides timing pulses for UART modules
-- **Mechanism**: A counter increments from 0 to 649. When it reaches 649, it resets and asserts a single-cycle `s_tick`.
+- **Mechanism**: A counter increments from 0 to 649. When it reaches 650, it resets and asserts a single-cycle `s_tick`.
 - **Verification**:
   - Simulated using **Vivado**
   - Output waveform confirms a clean `s_tick` pulse after every 650 cycles
