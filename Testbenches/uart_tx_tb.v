@@ -3,11 +3,11 @@
 module uart_tx_tb;
 
     // Parameters
-    parameter DBIT = 8;
-    parameter SB_TICK = 16;
-    parameter FINAL_VALUE = 650;  // For 9600 baud rate with 16x oversampling (650 counts)
+    parameter DBIT=8;
+    parameter SB_TICK=16;
+    parameter FINAL_VALUE=650; 
 
-    // Testbench signals
+
     reg clk, reset_n;
     reg tx_start;
     reg [DBIT-1:0] tx_din;
@@ -18,19 +18,18 @@ module uart_tx_tb;
     wire tx;
     wire [1:0] state_out;
     
-    // Instantiate the timer_input (Baud rate generator)
-    wire s_tick;  // Baud rate done signal to use as s_tick
+
+    wire s_tick; 
     timer_input #(.BITS(11)) baud_rate_gen (
         .clk(clk),
         .reset_n(reset_n),
-        .enable(1'b1),  // Enable the counter
-        .FINAL_VALUE(FINAL_VALUE),  // Value to count to (650 for 9600 baud rate)
-        .Q_reg(),   // We don't need to use Q_reg in this case
-        .done(s_tick)  // This will be our s_tick for uart_tx
+        .enable(1'b1),  
+        .FINAL_VALUE(FINAL_VALUE),  
+        .Q_reg(),   
+        .done(s_tick)
     );
 
-    // Instantiate uart_tx
-    uart_tx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) uut (
+    uart_tx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) uut(
         .clk(clk),
         .reset_n(reset_n),
         .tx_start(tx_start),
@@ -44,12 +43,12 @@ module uart_tx_tb;
         .state_out(state_out)
     );
 
-    // Clock generation (100MHz)
+
     always #5 clk = ~clk;
 
-    // Stimulus
+
     initial begin
-        // Initialize
+ 
         clk = 0;
         reset_n = 0;
         tx_start = 0;
@@ -58,17 +57,16 @@ module uart_tx_tb;
         // Reset pulse
         #20 reset_n = 1;
 
-        // Wait and start transmission
+     
         #100;
-        tx_start = 1;   // Start the transmission
+        tx_start = 1;  
         #10;
-        tx_start = 0;   // De-assert to simulate button press
+        tx_start = 0; 
 
-        // Wait for transmission to complete
+       
         wait(tx_done_tick);
-        #100;
+        #1000;
 
-        // End simulation
         $finish;
     end
 

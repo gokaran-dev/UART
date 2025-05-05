@@ -104,6 +104,43 @@ This project implements a complete **UART communication protocol** in **behavior
 
 ---
 
+## Board Implementation
+
+This UART communication system is fully compatible with **FPGA deployment** using the **Basys 3** development board. Two top-level modules — `uart_tx_board` and `uart_rx_board` — are provided for implementation directly on hardware.
+
+### Hardware Setup
+
+- **Transmitter (uart_tx_board):**
+  - **Inputs**:
+    - `tx_din`: Connected to switches
+    - `tx_start`: Connected to a switch
+    - `reset_n`: Connected to a switch
+  - **Outputs**:
+    - `tx`: Connected to JA3
+    - `tx_done_tick`: Connected to an **LED** to indicate transmission complete
+
+- **Receiver (uart_rx_board):**
+  - **Inputs**:
+    - `rx`: Connected to JA1
+    - `reset_n`: Connected to a switch
+  - **Outputs**:
+    - `rx_dout`: Displayed on LEDs
+    - `rx_done_tick`: Connected to an **LED** to indicate successful reception
+
+### File Support
+
+- ✅ **Bitstream (.bit) files** are available for both transmitter and receiver designs  
+- ✅ **XDC constraint files** for Basys 3 are included to map switches, buttons, and LEDs
+
+### Usage Instructions
+
+1. Flash the appropriate `.bit` files to **two Basys 3 boards** (one TX, one RX)
+2. Connect the **TX pin** of the transmitter board to the **RX pin** of the receiver board (use jumper wires)
+3. **Connect the GND** of both boards together
+4. Use switches to set the data byte and press the TX button
+5. Observe the LEDs on the receiver board lighting up with the received byte, and the `rx_done_tick` LED indicating success
+
+
 ## Notes
 
 - Fully **behavioral Verilog** design

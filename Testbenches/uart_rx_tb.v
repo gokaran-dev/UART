@@ -2,21 +2,18 @@
 
 module uart_rx_tb;
 
-    parameter DBIT = 8;
-    parameter SB_TICK = 16;
-    parameter FINAL_VALUE = 650;  // 100MHz / (9600*16)
+    parameter DBIT=8;
+    parameter SB_TICK=16;
+    parameter FINAL_VALUE=650; 
 
-    reg clk = 0;
-    reg reset_n = 0;
-    reg rx = 1;
+    reg clk=0;
+    reg reset_n=0;
+    reg rx=1;
     wire s_tick;
     wire rx_done_tick;
     wire [DBIT-1:0] rx_dout;
 
-    // Clock generation (100 MHz)
-    always #5 clk = ~clk;
 
-    // Instantiate Baud Rate Generator
     timer_input #(.BITS(11)) baud_gen (
         .clk(clk),
         .reset_n(reset_n),
@@ -26,7 +23,7 @@ module uart_rx_tb;
         .done(s_tick)
     );
 
-    // Instantiate UART RX
+
     uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) dut (
         .clk(clk),
         .reset_n(reset_n),
@@ -36,35 +33,42 @@ module uart_rx_tb;
         .rx_dout(rx_dout)
     );
 
-    // Task to send a UART frame: Start + 8 Data + Stop
-    task send_uart_byte(input [7:0] data);
+    
+    always #5 clk=~clk;
+
+    //sending 1 UART frame
+    task send_uart_byte(input [7:0]data);
         integer i, count;
         begin
-            // Start bit
-            rx = 0;
-            count = 0;
-            while (count < 16) begin
+            //Start bit
+            rx=0;
+            count=0;
+            while(count<16) 
+	    begin
                 @(posedge s_tick);
-                count = count + 1;
+                count=count + 1;
             end
 
             // Data bits (LSB first)
-            for (i = 0; i < 8; i = i + 1) begin
-                rx = data[i];
-                count = 0;
-                while (count < 16) begin
+            for(i=0;i<8;i=i+1) 
+	    begin
+                rx=data[i];
+                count=0;
+                while(count<16) 
+		begin
                     @(posedge s_tick);
                     count = count + 1;
                 end
             end
 
             // Stop bit
-            rx = 1;
-            count = 0;
-            while (count < 16) begin
+            rx=1;
+            count=0;
+            while(count<16) 
+		begin
                 @(posedge s_tick);
-                count = count + 1;
-            end
+                count=count+1;
+            	end
         end
     endtask
 
@@ -72,14 +76,11 @@ module uart_rx_tb;
         reset_n = 0;
         #20;
         reset_n = 1;
-
-        // Wait a little before sending
+	//wait for sometime before sending
         #100;
 
-        // Send one byte: 0xA5 = 10100101
         send_uart_byte(8'hA5);
 
-        // Wait to observe final rx_dout and rx_done_tick
         #1000;
     end
 
