@@ -93,20 +93,9 @@ This project implements a complete **UART communication protocol** in **behavior
 
 ---
 
-## FPGA Implementation Status
+## FPGA Implementation
 
-- **Not yet implemented on hardware**
-- Future plan:
-  - Use **two Basys 3 boards**:
-    - Board 1: Transmitter + Baud Generator
-    - Board 2: Receiver + Baud Generator
-  - Connect `tx` of one board to `rx` of the other
-
----
-
-## Board Implementation
-
-This UART communication system is fully compatible with **FPGA deployment** using the **Basys 3** development board. Two top-level modules — `uart_tx_board` and `uart_rx_board` — are provided for implementation directly on hardware.
+This UART communication system is fully compatible with **FPGA deployment** using the **Basys 3** development board. Two top-level modules, `uart_tx_board` and `uart_rx_board` are provided for implementation directly on hardware.
 
 ### Hardware Setup
 
