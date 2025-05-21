@@ -7,7 +7,7 @@ module uart_tx
         input tx_start, s_tick,        
         input [DBIT-1:0] tx_din,
         output reg [3:0] s_reg,
-        output reg [DBIT - 1:0] b_next,
+        output reg [DBIT-1:0] b_next,
         output reg tx_done_tick,
         output reg tx_reg,
         output tx,
@@ -100,7 +100,7 @@ module uart_tx
             begin
                 tx_next=1'b1;  
                 if (s_tick)
-                    if (s_reg==(SB_TICK - 1))
+                    if (s_reg==(SB_TICK-1))
                     begin
                         tx_done_tick=1'b1; 
                         state_next=idle;   
