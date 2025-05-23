@@ -4,29 +4,29 @@ module uart_tx
     )
     (
         input clk, reset_n,
-        input tx_start, s_tick,        
-        input [DBIT-1:0] tx_din,
-        output reg [3:0] s_reg,
-        output reg [DBIT-1:0] b_next,
+        input tx_start,s_tick,        
+        input [DBIT-1:0]tx_din,
+        output reg [3:0]s_reg,
+        output reg [DBIT-1:0]b_next,
         output reg tx_done_tick,
         output reg tx_reg,
         output tx,
-        output reg [1:0] state_out    
+        output reg [1:0]state_out    
     );
     
     localparam  idle=0, start=1,
                 data=2, stop=3;
                 
-    reg [1:0] state_reg, state_next;
-    reg [3:0] s_next;                
-    reg [$clog2(DBIT)-1:0] n_reg, n_next; 
-    reg [DBIT - 1:0] b_reg;         
+    reg [1:0] state_reg,state_next;
+    reg [3:0]s_next;                
+    reg [$clog2(DBIT)-1:0] n_reg,n_next; 
+    reg [DBIT-1:0]b_reg;         
     reg tx_next;                    
     
  
-    always @(posedge clk, negedge reset_n)
+    always @(posedge clk or negedge reset_n)
     begin
-        if (~reset_n)
+        if(~reset_n)
         begin
             state_reg<=idle;
             s_reg<=0;
