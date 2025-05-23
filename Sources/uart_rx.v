@@ -8,22 +8,22 @@ module uart_rx
         input clk,reset_n,
         input rx,s_tick,
         output reg rx_done_tick,
-        //output reg [3:0] s_reg,
-        output [DBIT-1:0] rx_dout
+        //output reg [3:0]s_reg,
+        output [DBIT-1:0]rx_dout
     );
     
     localparam  idle=0,start=1,
                 data=2,stop=3;
                 
-    reg [1:0] state_reg, state_next;
-    reg [3:0] s_reg, s_next;               
-    reg [$clog2(DBIT)-1:0] n_reg, n_next;
-    reg [DBIT-1:0] b_reg, b_next;         
+    reg [1:0] state_reg,state_next;
+    reg [3:0] s_reg,s_next;               
+    reg [$clog2(DBIT)-1:0]n_reg,n_next;
+    reg [DBIT-1:0] b_reg,b_next;         
     
    
-    always @(posedge clk, negedge reset_n)
+    always @(posedge clk or negedge reset_n)
     begin
-        if (~reset_n)
+        if(~reset_n)
         begin
             state_reg<=idle;
             s_reg<=0;
@@ -49,7 +49,7 @@ module uart_rx
         b_next=b_reg;
         rx_done_tick=1'b0;
         
-        case (state_reg)
+        case(state_reg)
             idle:                
                 if(~rx)
                 begin
